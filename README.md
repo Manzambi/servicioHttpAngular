@@ -30,7 +30,8 @@ En el apartado imports importamos los modulos, todo lo que termina con  module c
 
           BroserModule, FormsModule, RouterModule.forRoot(), HttpClientModule etc.
 
-    el formsModule lo usamos cuando queremos hacer un Biding direccional en dos sentidos escritura y lectura, el ejemplo es de la propiedad [(ngModule)]='nombredelatributo', por lo cual tenemoes que usar formsModule para usar esta propiedad.
+    el formsModule lo usamos cuando queremos hacer un Biding direccional en dos sentidos escritura y lectura, el ejemplo es de la propiedad [(ngModel)]='nombredelatributo', 
+    por lo cual tenemoes que usar formsModule para usar esta propiedad.
 
     RoterModule.ForRoot es para declarar la constante o el atributo que posee las rutas, ej: RouterModule.forRoot(nombredelavariable), HttpClienteModule lo explicaremos a parte.
 
