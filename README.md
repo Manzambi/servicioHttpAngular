@@ -43,6 +43,7 @@ En el apartado imports importamos los modulos, todo lo que termina con  module c
 por aqui declaramos todos los servicios de nuestra app, todos los servicio
 
 # Servicio Http
+#### guardar los datos POST
 
 como habiamos dicho dicho para poder usar el servivo http tenemos que importar desde nuestro imports httpClientModule, que se encuentra en la direccion 'angular/common/http'de la seguiente forma:
 
@@ -137,5 +138,52 @@ en firabase copiar la direccion y pegar nuestro codigo queda de la seguiente man
                           obs2: si quieres poder declarar sin la necesidad de inicializar va en tsconfig.json en la variable  "strict": false, este es el valor que tiene que tener 
               
 
-    
-              
+#### obtener los datos GET
+
+para obtener los datos usamos la propiedad get  asi queda:
+
+                        this.http.get('https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos.json')
+
+  con este metodo estamos obteniendo la informacion que esta en la base de datos. generalmente el metodo devuelve un observable, para poder ver esta informacion hay que subscribirse:
+
+                      this.http.get('https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos.json').subscribe(res=>{console.log(res)})
+                      
+ El codigo de arriba obtiene los datos de nuestra base de datos y lo guarda en la varible temporal res, y se muestra a nuestra consola, ahora como hicimos para mostrar estos dadtos que estan almacenados en res 
+ de modo que son observables.
+
+ Para mostrar en la web tenemos que declarar una variable que coge los valores que se guardan en res. ej: this.variable = res
+ si this.variable es un array y res es un observable dara error, lo que se puede hacer es ´this.variable = Object.values(res)´ quedando de la seguiente manera
+
+                          this.http.get('https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos.json').subscribe(res=>{this.variable = Object.values(res)})
+
+De esta forma los valores se almacenan en la variable ´variable´ en nuestra componente y enseñarlo en la web.
+
+### Actualizar datos PUT (update)
+
+en Servicio data.service tenemos que crear un metodo que se encarga de actualizar los datos, para eso tendra que recebir dos parametros que son: el indice y el arreglo de valores que obtuvimos con el get.
+el codigo de abajo ilustra la url que siempre usamos pero de esta vez concatenada con el indice de la variabla que posse estos valores. en este caso solo estariamos a coger un valor de entre tantos 
+
+            actualizar(indice, variableModificada)
+            {
+                 url = 'https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos/' + indice + '.json'
+                     this.http.post(url, variableModificada).subscribe( res=>console.log('se ha actualizado o modificado', error=>console.log(error))
+                              
+            }
+
+la ´variableModificada´ es la variable que lo modificamos en alguma otra clase o metodo, el nombre que ponemos alli es el nombre que declaremos en este caso apenas puse ´variableModificada´, esta varible
+se pasa por parametro a nuestro servicio junto con el indice, el metodo put lo que hara en nuestra base de datos es buscar el indice dentro de la base de datos, una vez encontrada reemplazara los valores que 
+se encuentran en este indice con el valor completo que estan en ´variableModificada´.
+          
+### Eliminar Datos (Delete)
+
+
+en dataservice se usa el seguienete metodo:
+
+    eliminar(indice)
+                {
+                     url = 'https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos/' + indice + '.json'
+                         this.http.delete(url).subscribe( res=>console.log('se ha eliminado', error=>console.log(error))
+                                  
+                }
+este medodo eliminara los datos en la base de datos correspondiente al indice que le pasemos.
+                        
