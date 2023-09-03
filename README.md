@@ -120,15 +120,18 @@ en firabase copiar la direccion y pegar nuestro codigo queda de la seguiente man
                         guardarEmpleados(nombredelavariable:arry[]){
                         
                         
-                              this.http.post('https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos.json', nombredelavariable).subscribe( res=>console.log('se ha guardado', error=>console.log(error))
+                              this.http.post('https://dbmiweb-38e47-default-rtdb.europe-west1.firebasedatabase.app/datos.json', nombredelavariable).subscribe
+                              ( res=>console.log('se ha guardado', error=>console.log(error))
                             
                             }
   una vez hecho eso cuando usamos este metodo en nuestro servicio una vez ejecutado nos vamos a la pagina que se encuentra la base de datos y veremos un base de datos creado. 
 
   
-                           obs: el tipo de base de datos que estamos a usar es la base de datos del tipo Realtime Database. pero hay un inconventiente usnado el metodo post en base de datos realtime porque duplica registro
-                           toda vez que ejecutamos un post.
+                           obs: el tipo de base de datos que estamos a usar es la base de datos del tipo Realtime Database. pero hay un inconventiente usnado el metodo post en base de datos 
+                           realtime porque duplica registro toda vez que ejecutamos un post.
 
+
+                          obs2: si quieres poder declarar sin la necesidad de inicializar va en tsconfig.json en la variable  "strict": false, este es el valor que tiene que tener 
               
 
     
