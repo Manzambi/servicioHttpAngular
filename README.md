@@ -187,3 +187,4 @@ en dataservice se usa el seguienete metodo:
                 }
 este medodo eliminara los datos en la base de datos correspondiente al indice que le pasemos.
                         
+### ng serve --proxy-config proxy.conf.json (comando usando en angular si queremos ejecutar una configuracion que hayamos hecho manual)
